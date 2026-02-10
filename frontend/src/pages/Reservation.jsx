@@ -84,7 +84,7 @@ export default function Reservation() {
                             Enviar confirmación por WhatsApp
                         </a>
                         <button
-                            onClick={() => navigate('/orders')}
+                            onClick={() => navigate('/profile')}
                             className="btn btn-outline w-full border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                         >
                             Ver mis reservaciones
