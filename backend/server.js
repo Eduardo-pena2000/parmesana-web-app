@@ -131,6 +131,61 @@ const startServer = async () => {
     // Sync database (create tables if they don't exist)
     await syncDatabase(false); // Set to true to force recreate tables
 
+    // Auto-seed menu if database is empty (prevents blank menu after redeploy)
+    try {
+      const { MenuItem, Category } = require('./src/models');
+      const itemCount = await MenuItem.count();
+      console.log(`📊 Menu items in database: ${itemCount}`);
+
+      if (itemCount < 20) {
+        console.log('🌱 Menu is empty/incomplete, auto-seeding...');
+        const fs = require('fs');
+        const path = require('path');
+        const MENU_JSON_PATH = path.join(__dirname, 'src', 'data', 'menu.json');
+
+        if (fs.existsSync(MENU_JSON_PATH)) {
+          const menuData = JSON.parse(fs.readFileSync(MENU_JSON_PATH, 'utf8'));
+          const { menu } = menuData;
+
+          // Clear existing incomplete data
+          await MenuItem.destroy({ where: {}, truncate: true, cascade: true });
+          await Category.destroy({ where: {}, truncate: true, cascade: true });
+
+          let totalItems = 0;
+          for (const categoryData of menu) {
+            const category = await Category.create({
+              name: categoryData.category,
+              slug: categoryData.category.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+              description: `Categoría: ${categoryData.category}`,
+              icon: categoryData.icon || '🍽️',
+              isActive: true,
+              order: menu.indexOf(categoryData)
+            });
+
+            for (const item of categoryData.items) {
+              await MenuItem.create({
+                name: item.name,
+                slug: item.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+                description: item.description || '',
+                basePrice: item.price || (item.sizes ? item.sizes[0].price : 0),
+                image: item.image || '',
+                categoryId: category.id,
+                isAvailable: true,
+                isFeatured: item.featured || false,
+                isPopular: item.popular || false,
+                sizes: item.sizes || null,
+                extras: item.extras || null
+              });
+              totalItems++;
+            }
+          }
+          console.log(`✅ Auto-seed complete: ${totalItems} items created`);
+        }
+      }
+    } catch (seedError) {
+      console.error('⚠️ Auto-seed failed (non-fatal):', seedError.message);
+    }
+
     // Start listening
     app.listen(PORT, () => {
       console.log(`
