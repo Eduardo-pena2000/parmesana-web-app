@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+// Production API URL hardcoded as fallback since .env files are gitignored
+const API_URL = import.meta.env.VITE_API_URL ||
+  (window.location.hostname === 'localhost'
+    ? 'http://localhost:3000/api'
+    : 'https://parmesana-api.onrender.com/api');
 console.log('🔌 API URL configured to:', API_URL);
 
 // Create axios instance
