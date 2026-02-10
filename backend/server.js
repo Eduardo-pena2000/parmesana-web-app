@@ -55,6 +55,11 @@ app.use('/api/reservations', require('./src/routes/reservations'));
 app.use('/api/payments', require('./src/routes/payments'));
 app.use('/api/seed', require('./src/routes/seed')); // Seed route
 
+app.get('/api/test-menu', (req, res) => {
+  console.log('Test Menu Route Hit');
+  res.json({ message: 'Menu routes should be working' });
+});
+
 // Health check
 app.get('/', (req, res) => {
   res.json({

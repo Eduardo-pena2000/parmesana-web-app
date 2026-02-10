@@ -45,7 +45,7 @@ exports.getCategories = async (req, res) => {
 exports.getCategoryBySlug = async (req, res) => {
   try {
     const category = await Category.findOne({
-      where: { 
+      where: {
         slug: req.params.slug,
         isActive: true
       },
@@ -82,12 +82,13 @@ exports.getCategoryBySlug = async (req, res) => {
 // @route   GET /api/menu/items
 // @access  Public
 exports.getMenuItems = async (req, res) => {
+  console.log('➡️ getMenuItems called');
   try {
-    const { 
-      category, 
-      search, 
-      isPopular, 
-      isFeatured, 
+    const {
+      category,
+      search,
+      isPopular,
+      isFeatured,
       isNew,
       minPrice,
       maxPrice,
@@ -169,7 +170,7 @@ exports.getMenuItems = async (req, res) => {
 exports.getMenuItem = async (req, res) => {
   try {
     const menuItem = await MenuItem.findOne({
-      where: { 
+      where: {
         slug: req.params.slug,
         isAvailable: true
       },
@@ -208,7 +209,7 @@ exports.getPopularItems = async (req, res) => {
     const { limit = 6 } = req.query;
 
     const menuItems = await MenuItem.findAll({
-      where: { 
+      where: {
         isAvailable: true,
         isPopular: true
       },
@@ -246,7 +247,7 @@ exports.getFeaturedItems = async (req, res) => {
     const { limit = 4 } = req.query;
 
     const menuItems = await MenuItem.findAll({
-      where: { 
+      where: {
         isAvailable: true,
         isFeatured: true
       },

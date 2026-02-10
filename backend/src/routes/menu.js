@@ -1,4 +1,5 @@
 const express = require('express');
+console.log('✅ Menu Routes Loaded');
 const router = express.Router();
 const {
   getCategories,
