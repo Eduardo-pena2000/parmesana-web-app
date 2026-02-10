@@ -161,10 +161,7 @@ export default function OrderDetail() {
                   <span className="text-gray-600">Subtotal</span>
                   <span>${parseFloat(order.subtotal).toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">IVA (16%)</span>
-                  <span>${parseFloat(order.tax).toFixed(2)}</span>
-                </div>
+
                 <div className="flex justify-between">
                   <span className="text-gray-600">Envío</span>
                   <span>${parseFloat(order.deliveryFee).toFixed(2)}</span>

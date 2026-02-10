@@ -8,9 +8,8 @@ export default function Cart() {
   const { isAuthenticated } = useAuthStore();
 
   const subtotal = getTotal();
-  const tax = (subtotal * 0.16).toFixed(2);
   const deliveryFee = subtotal < 300 ? 30 : 0;
-  const total = (parseFloat(subtotal) + parseFloat(tax) + deliveryFee).toFixed(2);
+  const total = (parseFloat(subtotal) + deliveryFee).toFixed(2);
 
   if (items.length === 0) {
     return (
@@ -118,10 +117,7 @@ export default function Cart() {
                   <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
                   <span className="font-semibold">${subtotal.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">IVA (16%)</span>
-                  <span className="font-semibold">${tax}</span>
-                </div>
+
                 <div className="flex justify-between">
                   <span className="text-gray-600 dark:text-gray-400">Envío</span>
                   <span className="font-semibold">

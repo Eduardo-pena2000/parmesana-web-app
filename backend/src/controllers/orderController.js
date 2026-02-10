@@ -98,12 +98,14 @@ exports.createOrder = async (req, res) => {
     const enrichedItems = [];
 
     for (const item of items) {
+      console.log(`🔍 Looking up menuItemId: ${item.menuItemId}`);
       const menuItem = await MenuItem.findByPk(item.menuItemId);
 
       if (!menuItem || !menuItem.isAvailable) {
+        console.error(`❌ Item not found or unavailable: menuItemId=${item.menuItemId}`);
         return res.status(400).json({
           success: false,
-          message: `Item ${item.menuItemId} no está disponible`
+          message: `Item con ID "${item.menuItemId}" no encontrado. Es posible que el menú se haya actualizado. Por favor, vacía tu carrito y agrega los productos de nuevo.`
         });
       }
 
