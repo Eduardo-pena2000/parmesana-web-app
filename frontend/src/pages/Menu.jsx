@@ -34,12 +34,12 @@ export default function Menu() {
   const fetchMenuItems = async () => {
     setLoading(true);
     try {
-      const filters = {};
-      if (selectedCategory) filters.category = selectedCategory;
-      if (searchQuery) filters.search = searchQuery;
-
-      const response = await menuService.getMenuItems(filters);
-      setMenuItems(response.data.menuItems || []);
+      const data = await menuService.getMenuItems({
+        category: selectedCategory !== 'all' ? selectedCategory : undefined,
+        search: searchQuery,
+        limit: 1000 // Load all items
+      });
+      setMenuItems(data.data.menuItems || []);
     } catch (error) {
       console.error('Error loading menu items:', error);
       toast.error('Error al cargar el menú');
@@ -122,11 +122,10 @@ export default function Menu() {
               <div className="space-y-2">
                 <button
                   onClick={() => handleCategoryChange('')}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
-                    !selectedCategory
+                  className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${!selectedCategory
                       ? 'bg-parmesana-green text-white'
                       : 'hover:bg-gray-100 dark:hover:bg-gray-700'
-                  }`}
+                    }`}
                 >
                   Todos
                 </button>
@@ -135,11 +134,10 @@ export default function Menu() {
                   <button
                     key={category.id}
                     onClick={() => handleCategoryChange(category.slug)}
-                    className={`w-full text-left px-4 py-2 rounded-lg transition-colors flex items-center ${
-                      selectedCategory === category.slug
+                    className={`w-full text-left px-4 py-2 rounded-lg transition-colors flex items-center ${selectedCategory === category.slug
                         ? 'bg-parmesana-green text-white'
                         : 'hover:bg-gray-100 dark:hover:bg-gray-700'
-                    }`}
+                      }`}
                   >
                     <span className="mr-2">{category.icon}</span>
                     <span>{category.name}</span>
