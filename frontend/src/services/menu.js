@@ -5,11 +5,19 @@ import toast from 'react-hot-toast';
 const handleRequest = async (requestFn, fallbackData) => {
   try {
     const response = await requestFn();
+
+    // VALIDATION: Ensure response is valid JSON and has expected structure
+    if (!response.data || typeof response.data !== 'object' || (response.data.success === undefined && !response.data.data)) {
+      throw new Error('Invalid API Response Format');
+    }
+
     return response.data;
   } catch (error) {
-    console.error('API Error, using fallback data:', error);
+    console.warn('⚠️ Menu Service Error/Validation Failed:', error.message);
+
     // Only show toast if it's a network error or server error to avoid spamming on 404s
-    if (!error.response || error.response.status >= 500) {
+    // Also show if it's a validation error (invalid response)
+    if (!error.response || error.response.status >= 500 || error.message === 'Invalid API Response Format') {
       toast.error('Modo Offline: Mostrando menú de respaldo', {
         id: 'offline-mode',
         duration: 4000,
