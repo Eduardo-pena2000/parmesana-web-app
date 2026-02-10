@@ -1,0 +1,48 @@
+[2026-02-09T09:51:21.270Z] Request Body: {"date":"2026-02-11","time":"16:00","guests":2,"specialRequests":"","contactName":"Eduardo Alejandro Botello Peña","contactPhone":"8136285741","occasion":""}
+[2026-02-09T09:51:21.271Z] User ID: 947fd2ae-54e4-4c2f-a2f9-82689bc681ce
+[2026-02-09T09:51:21.280Z] Attempting to create reservation...
+[2026-02-09T09:51:21.284Z] ERROR: notNull Violation: Reservation.reservationNumber cannot be null
+[2026-02-09T09:51:21.285Z] STACK: SequelizeValidationError: notNull Violation: Reservation.reservationNumber cannot be null
+    at InstanceValidator._validate (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\instance-validator.js:50:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\instance-validator.js:60:7)
+    at async InstanceValidator.validate (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\instance-validator.js:54:12)
+    at async model.save (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\model.js:2426:7)
+    at async Reservation.create (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\model.js:1362:12)
+    at async exports.createReservation (C:\Users\super\Desktop\parmesana-webapp\backend\src\controllers\reservationController.js:63:29)
+[2026-02-09T09:51:32.833Z] Request Body: {"date":"2026-02-11","time":"16:00","guests":2,"specialRequests":"","contactName":"Eduardo Alejandro Botello Peña","contactPhone":"8136285741","occasion":""}
+[2026-02-09T09:51:32.833Z] User ID: 947fd2ae-54e4-4c2f-a2f9-82689bc681ce
+[2026-02-09T09:51:32.838Z] Attempting to create reservation...
+[2026-02-09T09:51:32.840Z] ERROR: notNull Violation: Reservation.reservationNumber cannot be null
+[2026-02-09T09:51:32.840Z] STACK: SequelizeValidationError: notNull Violation: Reservation.reservationNumber cannot be null
+    at InstanceValidator._validate (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\instance-validator.js:50:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\instance-validator.js:60:7)
+    at async InstanceValidator.validate (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\instance-validator.js:54:12)
+    at async model.save (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\model.js:2426:7)
+    at async Reservation.create (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\model.js:1362:12)
+    at async exports.createReservation (C:\Users\super\Desktop\parmesana-webapp\backend\src\controllers\reservationController.js:63:29)
+[2026-02-09T09:51:38.687Z] Request Body: {"date":"2026-02-11","time":"16:00","guests":2,"specialRequests":"","contactName":"Eduardo Alejandro Botello Peña","contactPhone":"8136285741","occasion":""}
+[2026-02-09T09:51:38.687Z] User ID: 947fd2ae-54e4-4c2f-a2f9-82689bc681ce
+[2026-02-09T09:51:38.688Z] Attempting to create reservation...
+[2026-02-09T09:51:38.690Z] ERROR: notNull Violation: Reservation.reservationNumber cannot be null
+[2026-02-09T09:51:38.690Z] STACK: SequelizeValidationError: notNull Violation: Reservation.reservationNumber cannot be null
+    at InstanceValidator._validate (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\instance-validator.js:50:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\instance-validator.js:60:7)
+    at async InstanceValidator.validate (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\instance-validator.js:54:12)
+    at async model.save (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\model.js:2426:7)
+    at async Reservation.create (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\model.js:1362:12)
+    at async exports.createReservation (C:\Users\super\Desktop\parmesana-webapp\backend\src\controllers\reservationController.js:63:29)
+[2026-02-09T09:51:54.741Z] Request Body: {"date":"2026-02-11","time":"16:00","guests":"1","specialRequests":"sss","contactName":"Eduardo Alejandro Botello Peña","contactPhone":"8136285741","occasion":""}
+[2026-02-09T09:51:54.741Z] User ID: 947fd2ae-54e4-4c2f-a2f9-82689bc681ce
+[2026-02-09T09:51:54.746Z] Attempting to create reservation...
+[2026-02-09T09:51:54.748Z] ERROR: notNull Violation: Reservation.reservationNumber cannot be null
+[2026-02-09T09:51:54.748Z] STACK: SequelizeValidationError: notNull Violation: Reservation.reservationNumber cannot be null
+    at InstanceValidator._validate (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\instance-validator.js:50:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\instance-validator.js:60:7)
+    at async InstanceValidator.validate (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\instance-validator.js:54:12)
+    at async model.save (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\model.js:2426:7)
+    at async Reservation.create (C:\Users\super\Desktop\parmesana-webapp\backend\node_modules\sequelize\lib\model.js:1362:12)
+    at async exports.createReservation (C:\Users\super\Desktop\parmesana-webapp\backend\src\controllers\reservationController.js:63:29)
