@@ -94,20 +94,25 @@ router.post('/menu', async (req, res) => {
                 const isPopular = item.id === 'PZ001' || item.id === 'PP001' || item.id === 'H001';
                 const isFeatured = item.description && item.description.length > 20;
 
-                await MenuItem.create({
-                    categoryId: category.id,
-                    name: item.name,
-                    slug: generateSlug(item.name) + '-' + item.id,
-                    description: item.description || '',
-                    basePrice: basePrice,
-                    sizes: sizesArray,
-                    extras: extrasArray,
-                    ingredients: [],
-                    isPopular: isPopular,
-                    isFeatured: isFeatured,
-                    displayOrder: 0
-                });
-                itemCount++;
+                try {
+                    await MenuItem.create({
+                        categoryId: category.id,
+                        name: item.name,
+                        slug: generateSlug(item.name) + '-' + item.id,
+                        description: item.description || '',
+                        basePrice: basePrice,
+                        sizes: sizesArray,
+                        extras: extrasArray,
+                        ingredients: [],
+                        isAvailable: true, // Explicitly set
+                        isPopular: isPopular,
+                        isFeatured: isFeatured,
+                        displayOrder: 0
+                    });
+                    itemCount++;
+                } catch (err) {
+                    console.error(`❌ Error importing ${item.name}:`, err.message);
+                }
             }
         }
 
