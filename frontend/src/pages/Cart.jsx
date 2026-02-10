@@ -145,9 +145,14 @@ export default function Cart() {
                     Continuar al Pago
                   </Link>
                 ) : (
-                  <Link to="/login" className="btn btn-primary w-full py-3 block text-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">
-                    Inicia Sesión para Continuar
-                  </Link>
+                  <div className="space-y-3">
+                    <Link to="/login" className="btn btn-primary w-full py-3 block text-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">
+                      Inicia Sesión
+                    </Link>
+                    <Link to="/checkout" className="btn btn-outline w-full py-3 block text-center border-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
+                      Continuar como Invitado
+                    </Link>
+                  </div>
                 )}
 
                 <Link to="/menu" className="btn btn-secondary w-full py-3 block text-center">
