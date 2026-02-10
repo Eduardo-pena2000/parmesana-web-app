@@ -1,0 +1,665 @@
+{
+    "restaurant": {
+        "name": "La Parmesana",
+        "slogan": "Sabor y calidad que distingue",
+        "phones": [
+            "828-284-0040",
+            "828-122-9834",
+            "828-148-3318",
+            "828-100-5914"
+        ],
+        "social": {
+            "facebook": "@LAPARMESANACADEREYTA",
+            "instagram": "@LA.PARMESANA.CADEREYTA"
+        }
+    },
+    "menu": {
+        "entradas": [
+            {
+                "id": "E001",
+                "name": "Dedos de Queso",
+                "price": 95
+            },
+            {
+                "id": "E002",
+                "name": "Munchers",
+                "price": 60
+            },
+            {
+                "id": "E003",
+                "name": "Aros de Cebolla Gourmet",
+                "price": 60
+            },
+            {
+                "id": "E004",
+                "name": "Orden de Papas Curly",
+                "price": 60,
+                "extras": [
+                    {
+                        "queso": 30
+                    },
+                    {
+                        "tocino": 30
+                    }
+                ]
+            },
+            {
+                "id": "E005",
+                "name": "Jalapeño Poppers",
+                "price": 95
+            },
+            {
+                "id": "E006",
+                "name": "Orden de Papas a la Francesa",
+                "price": 55,
+                "extras": [
+                    {
+                        "queso": 30
+                    },
+                    {
+                        "tocino": 30
+                    }
+                ]
+            },
+            {
+                "id": "E007",
+                "name": "Orden de Papa al Horno",
+                "price": 45
+            },
+            {
+                "id": "E008",
+                "name": "Orden de Esquites (3 pzas)",
+                "price": 80
+            },
+            {
+                "id": "E009",
+                "name": "Esquite Individual",
+                "price": 30
+            },
+            {
+                "id": "E010",
+                "name": "Papas Crisscut",
+                "price": 60,
+                "extras": [
+                    {
+                        "queso": 30
+                    },
+                    {
+                        "tocino": 30
+                    }
+                ]
+            }
+        ],
+        "pastas": [
+            {
+                "id": "PA001",
+                "name": "Pasta Parmesana",
+                "price": 110,
+                "extras": [
+                    {
+                        "pollo plancha": 40
+                    },
+                    {
+                        "pollo empanizado": 45
+                    },
+                    {
+                        "camarón": 65
+                    }
+                ]
+            },
+            {
+                "id": "PA002",
+                "name": "Pasta Alfredo",
+                "price": 110,
+                "extras": [
+                    {
+                        "pollo plancha": 40
+                    },
+                    {
+                        "pollo empanizado": 45
+                    },
+                    {
+                        "camarón": 65
+                    }
+                ]
+            },
+            {
+                "id": "PA003",
+                "name": "Pasta Bolognesa",
+                "price": 120
+            },
+            {
+                "id": "PA004",
+                "name": "Lasagna",
+                "price": 165
+            }
+        ],
+        "ensaladas": [
+            {
+                "id": "EN001",
+                "name": "Ensalada La Parmesana",
+                "price": 90
+            },
+            {
+                "id": "EN002",
+                "name": "Ensalada Toscana",
+                "price": 90
+            },
+            {
+                "id": "EN003",
+                "name": "Ensalada César",
+                "price": 80,
+                "extras": [
+                    {
+                        "pollo plancha": 40
+                    },
+                    {
+                        "pollo empanizado": 45
+                    },
+                    {
+                        "camarón": 65
+                    }
+                ]
+            }
+        ],
+        "pizzas_clasicas": [
+            {
+                "id": "PZ001",
+                "name": "Pizza Peperoni",
+                "sizes": {
+                    "individual": 80,
+                    "mediana": 185,
+                    "grande": 240,
+                    "familiar": 295
+                }
+            },
+            {
+                "id": "PZ002",
+                "name": "Pizza La Original",
+                "description": "Peperoni, jamón, champiñones, pimiento morrón, cebolla",
+                "sizes": {
+                    "individual": 90,
+                    "mediana": 195,
+                    "grande": 250,
+                    "familiar": 305
+                }
+            },
+            {
+                "id": "PZ003",
+                "name": "Pizza Hawaiana",
+                "description": "Jamón, piña",
+                "sizes": {
+                    "individual": 90,
+                    "mediana": 195,
+                    "grande": 250,
+                    "familiar": 305
+                }
+            },
+            {
+                "id": "PZ004",
+                "name": "Pizza Mexicana",
+                "description": "Chorizo, frijoles, pimiento morrón, cebolla, chile serrano",
+                "sizes": {
+                    "individual": 90,
+                    "mediana": 195,
+                    "grande": 250,
+                    "familiar": 305
+                }
+            },
+            {
+                "id": "PZ005",
+                "name": "Pizza Atún",
+                "description": "Atún, elote, serrano, cebolla, aceitunas, tomate",
+                "sizes": {
+                    "individual": 90,
+                    "mediana": 195,
+                    "grande": 250,
+                    "familiar": 305
+                }
+            },
+            {
+                "id": "PZ006",
+                "name": "Pizza Vegetariana",
+                "description": "Champiñones, morrón, cebolla, tomate, aceitunas, elote",
+                "sizes": {
+                    "individual": 90,
+                    "mediana": 195,
+                    "grande": 250,
+                    "familiar": 305
+                }
+            }
+        ],
+        "pizzas_premium": [
+            {
+                "id": "PP001",
+                "name": "Pizza La Parmesana",
+                "description": "Peperoni, salami, salchicha italiana, jamón, tocino, queso parmesano, champiñones, chile serrano, pimiento morrón, cebolla",
+                "sizes": {
+                    "individual": 100,
+                    "mediana": 215,
+                    "grande": 270,
+                    "familiar": 325
+                }
+            },
+            {
+                "id": "PP002",
+                "name": "Pizza La Parmesana con Camarones",
+                "sizes": {
+                    "individual": 120,
+                    "mediana": 235,
+                    "grande": 290,
+                    "familiar": 345
+                }
+            },
+            {
+                "id": "PP003",
+                "name": "Pizza Chicken Boneless",
+                "description": "Boneless bañadas en salsa búfalo",
+                "sizes": {
+                    "individual": 100,
+                    "mediana": 215,
+                    "grande": 270,
+                    "familiar": 325
+                }
+            },
+            {
+                "id": "PP004",
+                "name": "Pizza Meat Lover",
+                "description": "Peperoni, salami, salchicha italiana, jamón, tocino, chorizo",
+                "sizes": {
+                    "individual": 100,
+                    "mediana": 215,
+                    "grande": 270,
+                    "familiar": 325
+                }
+            },
+            {
+                "id": "PP005",
+                "name": "Pizza La Italiana",
+                "description": "Peperoni, jamón, champiñones, pimiento morrón, cebolla, aceitunas",
+                "sizes": {
+                    "individual": 100,
+                    "mediana": 215,
+                    "grande": 270,
+                    "familiar": 325
+                }
+            },
+            {
+                "id": "PP006",
+                "name": "Pizza La Pibil",
+                "description": "Cochinita pibil, chile serrano, cebolla morada",
+                "sizes": {
+                    "individual": 100,
+                    "mediana": 215,
+                    "grande": 270,
+                    "familiar": 325
+                }
+            },
+            {
+                "id": "PP007",
+                "name": "Pizza 5 Quesos",
+                "description": "Mozzarella, manchego, provolone, cheddar, philadelphia",
+                "sizes": {
+                    "individual": 100,
+                    "mediana": 215,
+                    "grande": 270,
+                    "familiar": 325
+                }
+            },
+            {
+                "id": "PP008",
+                "name": "Pizza La Chiloria",
+                "description": "Chilorio, frijoles, chile serrano, cebolla morada, pimiento morrón",
+                "sizes": {
+                    "individual": 100,
+                    "mediana": 215,
+                    "grande": 270,
+                    "familiar": 325
+                }
+            },
+            {
+                "id": "PP009",
+                "name": "Pizza Al Pastor",
+                "description": "Pastor y piña (piña opcional)",
+                "sizes": {
+                    "individual": 100,
+                    "mediana": 215,
+                    "grande": 270,
+                    "familiar": 325
+                }
+            },
+            {
+                "id": "PP010",
+                "name": "Pizza La Grill",
+                "description": "Arrachera, salchicha, morrón, cebolla, serrano",
+                "sizes": {
+                    "individual": 145,
+                    "mediana": 275,
+                    "grande": 335,
+                    "familiar": 395
+                }
+            }
+        ],
+        "hamburguesas": [
+            {
+                "id": "H001",
+                "name": "Sirloin Burger",
+                "description": "150gr sirloin, queso mozzarella, cheddar, aros de cebolla, lechuga, tomate, cebolla, papas francesas",
+                "price": 150
+            },
+            {
+                "id": "H002",
+                "name": "Deluxe Burger",
+                "description": "150gr sirloin, mozzarella, cheddar, aros de cebolla, lechuga, tomate, cebolla, papas, tocino, cebolla caramelizada, champiñones",
+                "price": 165
+            },
+            {
+                "id": "H003",
+                "name": "Chicken Burger",
+                "description": "Tender de pollo, mozzarella, lechuga, cebolla morada, zanahoria",
+                "price": 150
+            },
+            {
+                "id": "H004",
+                "name": "Fit Burger",
+                "description": "Lechuga orejona, carne a la parrilla (sirloin o pollo), queso panela, aguacate, tomate, cebolla, ensalada pepino con zanahoria",
+                "price": 145
+            },
+            {
+                "id": "H005",
+                "name": "Sandwich Pechuga Fundida",
+                "description": "Media pechuga a la plancha, tocino, mezcla de quesos, mayonesa de la casa",
+                "price": 180
+            }
+        ],
+        "alitas_y_boneless": [
+            {
+                "id": "AL001",
+                "name": "Alitas 200gr",
+                "price": 105
+            },
+            {
+                "id": "AL002",
+                "name": "Alitas 380gr",
+                "price": 170
+            },
+            {
+                "id": "AL003",
+                "name": "Alitas 550gr",
+                "price": 230
+            },
+            {
+                "id": "BO001",
+                "name": "Boneless 160gr",
+                "price": 110
+            },
+            {
+                "id": "BO002",
+                "name": "Boneless 300gr",
+                "price": 180
+            },
+            {
+                "id": "BO003",
+                "name": "Boneless 450gr",
+                "price": 240
+            },
+            {
+                "id": "TE001",
+                "name": "Tenders 270gr",
+                "price": 130
+            },
+            {
+                "id": "TE002",
+                "name": "Tenders 420gr",
+                "price": 180
+            },
+            {
+                "id": "SP001",
+                "name": "Super Sampler",
+                "description": "6 alitas o 4 boneless, papas curly, 4 deditos de queso, aros de cebolla, 4 munchers",
+                "price": 215
+            },
+            {
+                "id": "CL001",
+                "name": "Chicken Lover",
+                "description": "10 alitas, 10 boneless, papas francesas, ensalada",
+                "price": 260
+            }
+        ],
+        "tacos": [
+            {
+                "id": "T001",
+                "name": "Tacos Al Pastor (300gr)",
+                "description": "Lomo de cerdo al pastor, incluye frijoles charros, salsas, cebolla morada",
+                "price": 145,
+                "extras": [
+                    {
+                        "queso": 15
+                    }
+                ]
+            },
+            {
+                "id": "T002",
+                "name": "Tacos de Alambre (300gr)",
+                "description": "Arrachera importada, salchicha, morrón, cebolla, queso, incluye frijoles charros",
+                "price": 165
+            },
+            {
+                "id": "T003",
+                "name": "Tacos de Arrachera (300gr)",
+                "description": "Arrachera importada, incluye frijoles charros, salsas, cebolla morada",
+                "price": 235,
+                "extras": [
+                    {
+                        "queso": 15
+                    }
+                ]
+            },
+            {
+                "id": "T004",
+                "name": "Tacos Al Pastor en Costra de Queso (4 pzas, 300gr)",
+                "price": 185
+            },
+            {
+                "id": "T005",
+                "name": "Tacos de Alambre en Costra de Queso (4 pzas, 300gr)",
+                "price": 210
+            },
+            {
+                "id": "T006",
+                "name": "Tacos de Arrachera en Costra de Queso (4 pzas, 300gr)",
+                "price": 280
+            }
+        ],
+        "burritos": [
+            {
+                "id": "B001",
+                "name": "Burrito de Alambre (300gr)",
+                "description": "Arrachera, salchicha, morrón, cebolla, queso, tortilla harina, guacamole, frijoles charros",
+                "price": 165
+            },
+            {
+                "id": "B002",
+                "name": "Burrito Al Pastor (300gr)",
+                "description": "Lomo de cerdo al pastor con queso, tortilla harina, guacamole, frijoles charros",
+                "price": 160
+            },
+            {
+                "id": "B003",
+                "name": "Burrito de Arrachera (300gr)",
+                "description": "Arrachera con queso, tortilla harina, guacamole, frijoles charros",
+                "price": 250
+            }
+        ],
+        "grill": [
+            {
+                "id": "G001",
+                "name": "Baby Back Ribs BBQ (700gr)",
+                "description": "Incluye elote con salsa cosmo y queso parmesano, papa al horno o papas francesas",
+                "price": 285
+            },
+            {
+                "id": "G002",
+                "name": "Baby Back Ribs BBQ Hot (700gr)",
+                "price": 285
+            },
+            {
+                "id": "G003",
+                "name": "Baby Back Ribs Mango Habanero (700gr)",
+                "price": 285
+            },
+            {
+                "id": "G004",
+                "name": "Papa Tex Mex",
+                "price": 150
+            },
+            {
+                "id": "G005",
+                "name": "Papa Tex Mex con Trompo",
+                "price": 190
+            },
+            {
+                "id": "G006",
+                "name": "Papa Tex Mex con Arrachera",
+                "price": 210
+            }
+        ],
+        "bebidas": [
+            {
+                "id": "BE001",
+                "name": "Agua Natural",
+                "price": 15
+            },
+            {
+                "id": "BE002",
+                "name": "Refresco",
+                "price": 35
+            },
+            {
+                "id": "BE003",
+                "name": "Refresco 1.75L (para llevar)",
+                "price": 65
+            },
+            {
+                "id": "BE004",
+                "name": "Agua de Limón",
+                "price": 35
+            },
+            {
+                "id": "BE005",
+                "name": "Agua Limón con Pepino",
+                "price": 40
+            },
+            {
+                "id": "BE006",
+                "name": "Limonada con Agua Mineral",
+                "price": 40
+            },
+            {
+                "id": "BE007",
+                "name": "Café Americano",
+                "price": 45
+            },
+            {
+                "id": "BE008",
+                "name": "Capuccino",
+                "price": 65
+            },
+            {
+                "id": "BE009",
+                "name": "Chocolate Caliente",
+                "price": 45
+            },
+            {
+                "id": "BE010",
+                "name": "Malteada Vainilla",
+                "price": 105
+            },
+            {
+                "id": "BE011",
+                "name": "Malteada Fresa",
+                "price": 105
+            },
+            {
+                "id": "BE012",
+                "name": "Malteada Chocolate",
+                "price": 105
+            },
+            {
+                "id": "BE013",
+                "name": "Malteada Mazapán",
+                "price": 105
+            },
+            {
+                "id": "BE014",
+                "name": "Malteada Caramelo",
+                "price": 105
+            }
+        ],
+        "postres": [
+            {
+                "id": "PO001",
+                "name": "Chocoflan",
+                "price": 55
+            },
+            {
+                "id": "PO002",
+                "name": "Pastel de Frambuesa",
+                "price": 75
+            },
+            {
+                "id": "PO003",
+                "name": "Pay de Tortuga",
+                "price": 70
+            },
+            {
+                "id": "PO004",
+                "name": "Pan de Elote con Nieve",
+                "price": 90
+            },
+            {
+                "id": "PO005",
+                "name": "Waffle Nevado",
+                "price": 140
+            }
+        ],
+        "promociones": [
+            {
+                "id": "PR001",
+                "name": "Mega Box",
+                "description": "Pizza mediana a elección + Super Sampler (alitas o boneless) + Refresco 1.75L",
+                "price": 430,
+                "note": "Solo para llevar"
+            }
+        ]
+    },
+    "extras": {
+        "pizza": {
+            "extra_queso": {
+                "individual": 30,
+                "mediana": 50,
+                "grande": 55,
+                "familiar": 60
+            },
+            "orilla_muncher": {
+                "individual": 25,
+                "mediana": 55,
+                "grande": 65,
+                "familiar": 75
+            }
+        },
+        "salsas": [
+            "Mango Habanero",
+            "BBQ Hot",
+            "Cosmo",
+            "Buffalo",
+            "Chipotle",
+            "BBQ",
+            "Honey Mustard",
+            "Ranch",
+            "Blue Cheese",
+            "Salsa Marinara",
+            "Queso Cheddar"
+        ]
+    }
+}

@@ -53,6 +53,7 @@ app.use('/api/menu', require('./src/routes/menu'));
 app.use('/api/orders', require('./src/routes/orders'));
 app.use('/api/reservations', require('./src/routes/reservations'));
 app.use('/api/payments', require('./src/routes/payments'));
+app.use('/api/seed', require('./src/routes/seed')); // Seed route
 
 // Health check
 app.get('/', (req, res) => {
