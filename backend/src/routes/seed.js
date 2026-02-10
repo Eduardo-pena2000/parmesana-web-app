@@ -4,8 +4,31 @@ const fs = require('fs');
 const path = require('path');
 const { Category, MenuItem } = require('../models');
 
+const { User } = require('../models');
+
 // Adjust path to point to backend/src/data/menu.json
 const MENU_JSON_PATH = path.join(__dirname, '..', 'data', 'menu.json');
+
+// Fix Phone Numbers Endpoint
+router.post('/fix-phones', async (req, res) => {
+    try {
+        const users = await User.findAll();
+        let count = 0;
+        for (const user of users) {
+            if (user.phone) {
+                const cleanPhone = user.phone.replace(/[\s\-\(\)]/g, '');
+                if (cleanPhone !== user.phone) {
+                    user.phone = cleanPhone;
+                    await user.save();
+                    count++;
+                }
+            }
+        }
+        res.json({ success: true, message: `Se corrigieron ${count} números de teléfono.` });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
 
 router.post('/menu', async (req, res) => {
     try {
