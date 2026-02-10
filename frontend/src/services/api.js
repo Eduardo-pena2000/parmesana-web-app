@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+console.log('🔌 API URL configured to:', API_URL);
 
 // Create axios instance
 const api = axios.create({
@@ -36,7 +37,7 @@ api.interceptors.response.use(
 
       try {
         const refreshToken = localStorage.getItem('refreshToken');
-        
+
         if (!refreshToken) {
           throw new Error('No refresh token');
         }
