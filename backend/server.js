@@ -128,8 +128,8 @@ const startServer = async () => {
     // Test database connection
     await testConnection();
 
-    // Sync database (create tables if they don't exist)
-    await syncDatabase(false); // Set to true to force recreate tables
+    // Sync database (create tables if they don't exist - safe mode)
+    await syncDatabase();
 
     // Auto-seed menu if database is empty (prevents blank menu after redeploy)
     try {

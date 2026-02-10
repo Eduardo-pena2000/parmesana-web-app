@@ -40,20 +40,12 @@ const testConnection = async () => {
   }
 };
 
-// Sync database (create tables)
-const syncDatabase = async (force = false) => {
+// Sync database (create tables if they don't exist)
+// NEVER use alter:true or force:true - it destroys data on redeploy!
+const syncDatabase = async () => {
   try {
-    // In production: just create tables if missing (NO alter - it destroys data!)
-    // In development: use alter to auto-update table structure
-    const isProduction = process.env.NODE_ENV === 'production';
-    const syncOptions = force
-      ? { force: true }
-      : isProduction
-        ? {} // Production: only create missing tables, never alter
-        : { alter: true }; // Dev: auto-update structure
-
-    await sequelize.sync(syncOptions);
-    console.log(`✅ Database synchronized (${force ? 'forced' : isProduction ? 'safe mode' : 'alter mode'})`);
+    await sequelize.sync(); // Only creates tables if missing
+    console.log('✅ Database synchronized (safe mode)');
   } catch (error) {
     console.error('❌ Error syncing database:', error);
   }
