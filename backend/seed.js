@@ -6,21 +6,23 @@ const seedData = async () => {
   try {
     console.log('🌱 Iniciando seed de base de datos...\n');
 
-    // Sync database
-    await syncDatabase(true); // Force recreate tables
+    // Sync database (safe - only create missing tables)
+    await syncDatabase();
 
-    // Create Admin User
+    // Create Admin User (skip if already exists)
     console.log('👤 Creando usuario administrador...');
-    const admin = await User.create({
-      phone: '+528281005914',
-      email: 'admin@laparmesana.com',
-      password: 'admin123',
-      firstName: 'Admin',
-      lastName: 'La Parmesana',
-      role: 'admin',
-      isVerified: true
+    const [admin, created] = await User.findOrCreate({
+      where: { email: 'admin@laparmesana.com' },
+      defaults: {
+        phone: '+528281005914',
+        password: 'admin123',
+        firstName: 'Admin',
+        lastName: 'La Parmesana',
+        role: 'admin',
+        isVerified: true
+      }
     });
-    console.log('✅ Admin creado\n');
+    console.log(created ? '✅ Admin creado' : '✅ Admin ya existía, omitiendo');
 
     // Create Categories
     console.log('📂 Creando categorías...');
