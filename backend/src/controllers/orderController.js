@@ -50,7 +50,7 @@ exports.createOrder = async (req, res) => {
           firstName: 'Invitado',
           lastName: 'General',
           email: 'guest@parmesana.com',
-          phone: '0000000000',
+          phone: '9999999999', // Must start with 1-9 to pass validation
           password: 'guest_secure_pass_' + Math.random(),
           role: 'user',
           isActive: true
