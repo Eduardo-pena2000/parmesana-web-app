@@ -39,9 +39,9 @@ export default function Checkout() {
 
   // Calculate totals
   const subtotal = getTotal();
-  const tax = (subtotal * 0.16);
+  const tax = 0;
   const deliveryFee = subtotal < 300 ? 30 : 0;
-  const total = parseFloat(subtotal) + tax + deliveryFee;
+  const total = parseFloat(subtotal) + deliveryFee;
 
   useEffect(() => {
     if (items.length === 0) {
@@ -442,10 +442,7 @@ export default function Checkout() {
                   <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
                   <span>${subtotal.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">IVA (16%)</span>
-                  <span>${tax.toFixed(2)}</span>
-                </div>
+
                 <div className="flex justify-between">
                   <span className="text-gray-600 dark:text-gray-400">Envío</span>
                   <span className={deliveryFee === 0 ? 'text-parmesana-green' : ''}>

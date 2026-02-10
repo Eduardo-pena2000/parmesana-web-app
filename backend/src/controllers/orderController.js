@@ -150,8 +150,8 @@ exports.createOrder = async (req, res) => {
     }
 
     // Calculate additional fees
-    const taxRate = parseFloat(process.env.TAX_RATE) || 0.16;
-    const tax = (subtotal * taxRate).toFixed(2);
+    // Tax removed per business request
+    const tax = 0;
 
     let deliveryFee = 0;
     if (type === 'delivery') {
