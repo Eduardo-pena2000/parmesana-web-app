@@ -99,7 +99,12 @@ exports.register = async (req, res) => {
 // @access  Public
 exports.login = async (req, res) => {
   try {
-    const { phone, email, password } = req.body;
+    let { phone, email, password } = req.body;
+
+    // Sanitize phone (remove spaces)
+    if (phone) {
+      phone = phone.replace(/\s+/g, '');
+    }
 
     // Validate required fields
     if ((!phone && !email) || !password) {
