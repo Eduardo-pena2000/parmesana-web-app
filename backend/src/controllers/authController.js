@@ -23,7 +23,12 @@ const generateTokens = (userId) => {
 // @access  Public
 exports.register = async (req, res) => {
   try {
-    const { phone, email, password, firstName, lastName } = req.body;
+    let { phone, email, password, firstName, lastName } = req.body;
+
+    // Sanitize phone (remove spaces)
+    if (phone) {
+      phone = phone.replace(/\s+/g, '');
+    }
 
     // Validate required fields
     if (!phone || !firstName) {
