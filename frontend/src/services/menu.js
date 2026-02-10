@@ -16,8 +16,9 @@ const handleRequest = async (requestFn, fallbackData) => {
         icon: '📡'
       });
     }
-    // Return mock data structure matching API response
-    return { success: true, ...fallbackData };
+    // Return mock data structure matching API response (axios response.data usually has a 'data' property in our backend)
+    // Structure: { success: true, data: { menuItems: [...] } }
+    return { success: true, data: fallbackData };
   }
 };
 
