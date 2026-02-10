@@ -39,15 +39,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW) * 60 * 1000 || 15 * 60 * 1000,
-  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
-  message: 'Demasiadas peticiones desde esta IP, intenta de nuevo más tarde'
-});
-app.use('/api/', limiter);
-
-// Routes
+// Routes (mount BEFORE rate limiting to avoid conflicts)
 app.use('/api/auth', require('./src/routes/auth'));
 app.use('/api/menu', require('./src/routes/menu'));
 app.use('/api/orders', require('./src/routes/orders'));
@@ -59,6 +51,14 @@ app.get('/api/test-menu', (req, res) => {
   console.log('Test Menu Route Hit');
   res.json({ message: 'Menu routes should be working' });
 });
+
+// Rate limiting (applied AFTER routes to avoid blocking them)
+const limiter = rateLimit({
+  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW) * 60 * 1000 || 15 * 60 * 1000,
+  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
+  message: 'Demasiadas peticiones desde esta IP, intenta de nuevo más tarde'
+});
+app.use('/api', limiter);
 
 // Health check
 app.get('/', (req, res) => {
