@@ -101,9 +101,9 @@ exports.login = async (req, res) => {
   try {
     let { phone, email, password } = req.body;
 
-    // Sanitize phone (remove spaces)
+    // Sanitize phone (remove spaces, dashes, parentheses)
     if (phone) {
-      phone = phone.replace(/\s+/g, '');
+      phone = phone.replace(/[\s\-\(\)]/g, '');
     }
 
     // Validate required fields
