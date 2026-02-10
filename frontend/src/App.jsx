@@ -22,11 +22,13 @@ import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import ScrollToTop from './components/ScrollToTop';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
+      <FloatingWhatsApp />
       <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
         <Toaster
           position="top-center"

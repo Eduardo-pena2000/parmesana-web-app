@@ -116,7 +116,10 @@ export default function Home() {
             </div>
           </div>
         </div>
+
       </section >
+
+
 
       {/* Categories */}
       {
@@ -144,6 +147,109 @@ export default function Home() {
           </section>
         )
       }
+
+
+
+      {/* Stats Section */}
+      <section className="py-16 bg-gradient-to-r from-parmesana-green to-green-600 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-pattern opacity-10"></div>
+        <div className="container-custom relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/20">
+            <div className="p-4">
+              <div className="text-4xl md:text-5xl font-bold mb-2 font-display">5k+</div>
+              <div className="text-sm md:text-base opacity-90 font-medium">Pizzas Entregadas</div>
+            </div>
+            <div className="p-4">
+              <div className="text-4xl md:text-5xl font-bold mb-2 font-display">45m</div>
+              <div className="text-sm md:text-base opacity-90 font-medium">Tiempo Promedio</div>
+            </div>
+            <div className="p-4">
+              <div className="text-4xl md:text-5xl font-bold mb-2 font-display">4.9</div>
+              <div className="text-sm md:text-base opacity-90 font-medium">Calificación</div>
+            </div>
+            <div className="p-4">
+              <div className="text-4xl md:text-5xl font-bold mb-2 font-display">100%</div>
+              <div className="text-sm md:text-base opacity-90 font-medium">Sabor Casero</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 bg-white dark:bg-gray-800">
+        <div className="container-custom">
+          <h2 className="text-3xl font-bold mb-12 text-center">
+            Lo Que Dicen Nuestros Clientes
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="card p-8 hover:-translate-y-2 transition-transform duration-300 border-t-4 border-parmesana-green">
+              <div className="flex text-yellow-400 mb-4">
+                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current" />
+              </div>
+              <p className="text-gray-600 dark:text-gray-300 mb-6 italic">
+                "¡La pizza de boneless es una locura! Súper recomendada, llegaron rapidísimo y calientita."
+              </p>
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-600">
+                  CR
+                </div>
+                <div className="ml-3">
+                  <h4 className="font-bold">Carlos Ruiz</h4>
+                  <span className="text-xs text-gray-500">Cliente Frecuente</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="card p-8 hover:-translate-y-2 transition-transform duration-300 border-t-4 border-parmesana-green">
+              <div className="flex text-yellow-400 mb-4">
+                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current" />
+              </div>
+              <p className="text-gray-600 dark:text-gray-300 mb-6 italic">
+                "Me encanta que pueda pedir por la página y pagar con tarjeta. Súper fácil y las hamburguesas 10/10."
+              </p>
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-600">
+                  AG
+                </div>
+                <div className="ml-3">
+                  <h4 className="font-bold">Ana González</h4>
+                  <span className="text-xs text-gray-500">Foodie</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="card p-8 hover:-translate-y-2 transition-transform duration-300 border-t-4 border-parmesana-green">
+              <div className="flex text-yellow-400 mb-4">
+                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current" />
+              </div>
+              <p className="text-gray-600 dark:text-gray-300 mb-6 italic">
+                "Las costillas BBQ se deshacen de lo suaves que están. Definitivamente pediré de nuevo."
+              </p>
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-600">
+                  JL
+                </div>
+                <div className="ml-3">
+                  <h4 className="font-bold">Jorge López</h4>
+                  <span className="text-xs text-gray-500">Local Guide</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Featured Items */}
       {
@@ -192,6 +298,73 @@ export default function Home() {
           </section>
         )
       }
+
+      {/* Food Gallery */}
+      <section className="py-16 bg-white dark:bg-gray-800">
+        <div className="container-custom">
+          <h2 className="text-3xl font-bold mb-12 text-center">
+            Nuestros Mejores Momentos
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-auto md:h-[600px]">
+            {/* 1. Large Main Item (Pizza) - 2x2 */}
+            <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-2xl cursor-pointer h-64 md:h-auto">
+              <img
+                src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1000&auto=format&fit=crop"
+                alt="Pizza Artesanal"
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 transition-opacity"></div>
+              <div className="absolute bottom-6 left-6 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <span className="bg-parmesana-orange text-xs font-bold px-2 py-1 rounded mb-2 inline-block">Bestseller</span>
+                <h3 className="text-2xl font-bold">Pizzas Artesanales</h3>
+              </div>
+            </div>
+
+            {/* 2. Burger - 1x1 */}
+            <div className="relative group overflow-hidden rounded-2xl cursor-pointer h-48 md:h-auto">
+              <img
+                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop"
+                alt="Hamburguesa Gourmet"
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+            </div>
+
+            {/* 3. Pasta - 1x1 */}
+            <div className="relative group overflow-hidden rounded-2xl cursor-pointer h-48 md:h-auto">
+              <img
+                src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=800&auto=format&fit=crop"
+                alt="Pastas"
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+            </div>
+
+            {/* 4. Wings/BBQ - 1x1 */}
+            <div className="relative group overflow-hidden rounded-2xl cursor-pointer h-48 md:h-auto">
+              <img
+                src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800&auto=format&fit=crop"
+                alt="Costillas BBQ"
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+            </div>
+
+            {/* 5. Drinks/Dessert - 1x1 */}
+            <div className="relative group overflow-hidden rounded-2xl cursor-pointer h-48 md:h-auto">
+              <img
+                src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=800&auto=format&fit=crop"
+                alt="Bebidas y Postres"
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="bg-white/90 text-gray-900 font-bold px-4 py-2 rounded-full shadow-lg">Ver Más</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-parmesana-green text-white">
