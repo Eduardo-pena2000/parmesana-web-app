@@ -42,19 +42,42 @@ exports.createOrder = async (req, res) => {
 
       // Find or Create generic "Guest" user to map the order to
       // We use a fixed email or phone for the "Guest User" placeholder in DB
-      let guestUser = await User.findOne({ where: { email: 'guest@parmesana.com' } });
+      // Find or Create generic "Guest" user to map the order to
+      // Look up by email OR phone to avoid unique constraint violations
+      let guestUser = await User.findOne({
+        where: {
+          [Op.or]: [
+            { email: 'guest@parmesana.com' },
+            { phone: '9999999999' }
+          ]
+        }
+      });
 
       if (!guestUser) {
         // Create the generic guest user if not exists
-        guestUser = await User.create({
-          firstName: 'Invitado',
-          lastName: 'General',
-          email: 'guest@parmesana.com',
-          phone: '9999999999', // Must start with 1-9 to pass validation
-          password: 'guest_secure_pass_' + Math.random(),
-          role: 'user',
-          isActive: true
-        });
+        try {
+          guestUser = await User.create({
+            firstName: 'Invitado',
+            lastName: 'General',
+            email: 'guest@parmesana.com',
+            phone: '9999999999',
+            password: 'guest_secure_pass_' + Math.random(),
+            role: 'user',
+            isActive: true
+          });
+        } catch (createError) {
+          // If creation fails (race condition), try finding one last time
+          guestUser = await User.findOne({
+            where: {
+              [Op.or]: [
+                { email: 'guest@parmesana.com' },
+                { phone: '9999999999' }
+              ]
+            }
+          });
+
+          if (!guestUser) throw createError;
+        }
       }
       userId = guestUser.id;
 
