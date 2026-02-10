@@ -115,7 +115,13 @@ export default function Checkout() {
         total: parseFloat(total),
         notes: formData.notes,
         status: status, // potentially 'paid' if coming from Stripe
-        transactionId: transactionId
+        transactionId: transactionId,
+        guestInfo: !user ? {
+          firstName: formData.guestName,
+          lastName: '',
+          phone: formData.guestPhone,
+          email: 'guest@checkout.com' // Placeholder or add email field
+        } : null
       };
 
       await orderService.createOrder(orderData);
@@ -171,14 +177,48 @@ export default function Checkout() {
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded">
-                  <span className="text-xs text-gray-500 uppercase">Nombre</span>
-                  <p className="font-medium truncate">{user?.firstName} {user?.lastName}</p>
-                </div>
-                <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded">
-                  <span className="text-xs text-gray-500 uppercase">Teléfono</span>
-                  <p className="font-medium truncate">{user?.phone}</p>
-                </div>
+                {user ? (
+                  <>
+                    <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded">
+                      <span className="text-xs text-gray-500 uppercase">Nombre</span>
+                      <p className="font-medium truncate">{user.firstName} {user.lastName}</p>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded">
+                      <span className="text-xs text-gray-500 uppercase">Teléfono</span>
+                      <p className="font-medium truncate">{user.phone}</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="col-span-2 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg mb-2 text-sm text-blue-800 dark:text-blue-200">
+                      📝 Estás comprando como <strong>Invitado</strong>.
+                    </div>
+                    <div className="col-span-1">
+                      <label className="label">Nombre *</label>
+                      <input
+                        type="text"
+                        name="guestName"
+                        required
+                        className="input"
+                        placeholder="Tu Nombre"
+                        value={formData.guestName || ''}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="col-span-1">
+                      <label className="label">Teléfono *</label>
+                      <input
+                        type="tel"
+                        name="guestPhone"
+                        required
+                        className="input"
+                        placeholder="Tu Teléfono"
+                        value={formData.guestPhone || ''}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
 
               <form id="checkout-form" onSubmit={handleSubmit} className="space-y-4">

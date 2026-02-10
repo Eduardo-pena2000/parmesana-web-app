@@ -9,15 +9,16 @@ const {
   rateOrder,
   getOrderStats
 } = require('../controllers/orderController');
-const { auth } = require('../middleware/auth');
+const { auth, optionalAuth } = require('../middleware/auth');
 
-// All routes require authentication
+// Public routes (Guest Checkout)
+router.post('/', optionalAuth, createOrder);
+router.get('/number/:orderNumber', optionalAuth, getOrderByNumber); // Allow guests to track order
+
+// Protected routes
 router.use(auth);
-
-router.post('/', createOrder);
 router.get('/', getUserOrders);
 router.get('/stats', getOrderStats);
-router.get('/number/:orderNumber', getOrderByNumber);
 router.get('/:id', getOrder);
 router.put('/:id/cancel', cancelOrder);
 router.put('/:id/rate', rateOrder);

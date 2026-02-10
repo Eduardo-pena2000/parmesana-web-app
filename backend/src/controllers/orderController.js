@@ -8,14 +8,15 @@ exports.createOrder = async (req, res) => {
   try {
     const {
       items,
-      type = 'delivery', // Default to delivery if not specified
+      type = 'delivery',
       addressId,
-      shippingAddress: rawAddress, // Accept raw address object
+      shippingAddress: rawAddress,
       paymentMethod,
       notes,
       deliveryTime,
-      status = 'pending', // Accept status (e.g. 'paid')
-      transactionId // Accept transactionId
+      status = 'pending',
+      transactionId,
+      guestInfo // New field for guest details { firstName, lastName, phone, email }
     } = req.body;
 
     // Validate items
@@ -24,6 +25,49 @@ exports.createOrder = async (req, res) => {
         success: false,
         message: 'El pedido debe contener al menos un item'
       });
+    }
+
+    // Handle User ID (Auth vs Guest)
+    let userId = req.user?.id;
+    let finalDeliveryAddress = rawAddress;
+
+    if (!userId) {
+      // Guest Checkout Logic
+      if (!guestInfo || !guestInfo.phone || !guestInfo.firstName) {
+        return res.status(400).json({
+          success: false,
+          message: 'Nombre y teléfono son requeridos para pedidos de invitado'
+        });
+      }
+
+      // Find or Create generic "Guest" user to map the order to
+      // We use a fixed email or phone for the "Guest User" placeholder in DB
+      let guestUser = await User.findOne({ where: { email: 'guest@parmesana.com' } });
+
+      if (!guestUser) {
+        // Create the generic guest user if not exists
+        guestUser = await User.create({
+          firstName: 'Invitado',
+          lastName: 'General',
+          email: 'guest@parmesana.com',
+          phone: '0000000000',
+          password: 'guest_secure_pass_' + Math.random(),
+          role: 'user',
+          isActive: true
+        });
+      }
+      userId = guestUser.id;
+
+      // Enhance delivery address with guest contact info
+      if (type === 'delivery' && finalDeliveryAddress) {
+        finalDeliveryAddress = {
+          ...finalDeliveryAddress,
+          firstName: guestInfo.firstName,
+          lastName: guestInfo.lastName,
+          phone: guestInfo.phone,
+          email: guestInfo.email
+        };
+      }
     }
 
     // Calculate totals
@@ -99,7 +143,7 @@ exports.createOrder = async (req, res) => {
     // Get address info if delivery
     let deliveryAddress = null;
     if (type === 'delivery') {
-      if (addressId) {
+      if (addressId && req.user) { // Only look up ID if authenticated
         const address = await Address.findOne({
           where: {
             id: addressId,
@@ -114,9 +158,9 @@ exports.createOrder = async (req, res) => {
           });
         }
         deliveryAddress = address.toJSON();
-      } else if (rawAddress) {
-        // Use the raw address provided in the request
-        deliveryAddress = rawAddress;
+      } else if (finalDeliveryAddress) {
+        // Use the raw address details
+        deliveryAddress = finalDeliveryAddress;
       } else {
         return res.status(400).json({
           success: false,
@@ -125,7 +169,7 @@ exports.createOrder = async (req, res) => {
       }
     }
 
-    // Generate order number manually to avoid validation error
+    // Generate order number manually
     const date = new Date();
     const year = date.getFullYear().toString().slice(-2);
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -135,9 +179,9 @@ exports.createOrder = async (req, res) => {
 
     // Create order
     const order = await Order.create({
-      orderNumber, // Add generated order number
-      userId: req.user.id,
-      addressId: type === 'delivery' ? addressId : null,
+      orderNumber,
+      userId,
+      addressId: (req.user && type === 'delivery') ? addressId : null,
       source: 'web',
       type,
       items: enrichedItems,
@@ -150,15 +194,20 @@ exports.createOrder = async (req, res) => {
       deliveryTime: deliveryTime || null,
       notes,
       estimatedDelivery: type === 'delivery' ? 45 : 20,
-      status: status, // Use provided status
-      paymentStatus: status === 'confirmed' ? 'approved' : 'pending', // Set payment status based on order status
-      transactionId: transactionId // Save transaction ID
+      status: status,
+      paymentStatus: status === 'confirmed' ? 'approved' : 'pending',
+      transactionId: transactionId
     });
 
-    // Calculate loyalty points (1 punto por cada peso)
-    const pointsEarned = Math.floor(parseFloat(total));
-    order.pointsEarned = pointsEarned;
-    await order.save();
+    // Calculate loyalty points only for real users
+    if (req.user) {
+      const pointsEarned = Math.floor(parseFloat(total));
+      order.pointsEarned = pointsEarned;
+      await order.save();
+
+      // Update user points
+      await User.increment('loyaltyPoints', { by: pointsEarned, where: { id: userId } });
+    }
 
     res.status(201).json({
       success: true,

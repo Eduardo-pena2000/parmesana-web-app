@@ -54,6 +54,10 @@ export const useAuthStore = create((set) => ({
         isAuthenticated: false,
         error: null
       });
+      // Clear cart on logout
+      import('./cartStore').then(({ useCartStore }) => {
+        useCartStore.getState().clearCart();
+      });
     }
   },
 
