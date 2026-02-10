@@ -46,8 +46,10 @@ exports.register = async (req, res) => {
     }
 
     // Check email if provided
-    if (email) {
-      const emailExists = await User.findOne({ where: { email } });
+    const emailToSave = email === '' ? null : email;
+
+    if (emailToSave) {
+      const emailExists = await User.findOne({ where: { email: emailToSave } });
       if (emailExists) {
         return res.status(400).json({
           success: false,
@@ -59,7 +61,7 @@ exports.register = async (req, res) => {
     // Create user
     const user = await User.create({
       phone,
-      email,
+      email: emailToSave,
       password,
       firstName,
       lastName
@@ -244,7 +246,7 @@ exports.logout = async (req, res) => {
   try {
     // In a production app, you might want to blacklist the token
     // For now, we just return success as the client will delete the token
-    
+
     res.json({
       success: true,
       message: 'Logout exitoso'
