@@ -16,7 +16,8 @@ import MockCardForm from '../components/MockCardForm';
 
 
 // Replace with your actual Stripe publishable key
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+// Replace with your actual Stripe publishable key
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 export default function Checkout() {
   const navigate = useNavigate();
