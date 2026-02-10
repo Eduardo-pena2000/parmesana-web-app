@@ -142,48 +142,66 @@ const startServer = async () => {
         const fs = require('fs');
         const path = require('path');
         const MENU_JSON_PATH = path.join(__dirname, 'src', 'data', 'menu.json');
+        console.log('📂 Looking for menu.json at:', MENU_JSON_PATH);
+        console.log('📂 File exists:', fs.existsSync(MENU_JSON_PATH));
 
         if (fs.existsSync(MENU_JSON_PATH)) {
           const menuData = JSON.parse(fs.readFileSync(MENU_JSON_PATH, 'utf8'));
           const { menu } = menuData;
 
-          // Clear existing incomplete data
-          await MenuItem.destroy({ where: {}, truncate: true, cascade: true });
-          await Category.destroy({ where: {}, truncate: true, cascade: true });
+          // Safe delete (no truncate - avoids permission issues on Render)
+          await MenuItem.destroy({ where: {} });
+          await Category.destroy({ where: {} });
+          console.log('🗑️ Old data cleared safely');
 
           let totalItems = 0;
           for (const categoryData of menu) {
-            const category = await Category.create({
-              name: categoryData.category,
-              slug: categoryData.category.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
-              description: `Categoría: ${categoryData.category}`,
-              icon: categoryData.icon || '🍽️',
-              isActive: true,
-              order: menu.indexOf(categoryData)
-            });
-
-            for (const item of categoryData.items) {
-              await MenuItem.create({
-                name: item.name,
-                slug: item.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
-                description: item.description || '',
-                basePrice: item.price || (item.sizes ? item.sizes[0].price : 0),
-                image: item.image || '',
-                categoryId: category.id,
-                isAvailable: true,
-                isFeatured: item.featured || false,
-                isPopular: item.popular || false,
-                sizes: item.sizes || null,
-                extras: item.extras || null
+            try {
+              const category = await Category.create({
+                name: categoryData.category,
+                slug: categoryData.category.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+                description: `Categoría: ${categoryData.category}`,
+                icon: categoryData.icon || '🍽️',
+                isActive: true,
+                order: menu.indexOf(categoryData)
               });
-              totalItems++;
+
+              for (const item of categoryData.items) {
+                try {
+                  await MenuItem.create({
+                    name: item.name,
+                    slug: item.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+                    description: item.description || '',
+                    basePrice: item.price || (item.sizes ? item.sizes[0].price : 0),
+                    image: item.image || '',
+                    categoryId: category.id,
+                    isAvailable: true,
+                    isFeatured: item.featured || false,
+                    isPopular: item.popular || false,
+                    sizes: item.sizes || null,
+                    extras: item.extras || null
+                  });
+                  totalItems++;
+                } catch (itemErr) {
+                  console.error(`⚠️ Item "${item.name}" failed:`, itemErr.message);
+                }
+              }
+            } catch (catErr) {
+              console.error(`⚠️ Category "${categoryData.category}" failed:`, catErr.message);
             }
           }
-          console.log(`✅ Auto-seed complete: ${totalItems} items created`);
+
+          const finalCount = await MenuItem.count();
+          console.log(`✅ Auto-seed complete: ${totalItems} items attempted, ${finalCount} in DB`);
+        } else {
+          console.error('❌ menu.json NOT FOUND');
         }
+      } else {
+        console.log('✅ Menu already has', itemCount, 'items, skipping seed');
       }
     } catch (seedError) {
-      console.error('⚠️ Auto-seed failed (non-fatal):', seedError.message);
+      console.error('⚠️ Auto-seed failed:', seedError.message);
+      console.error('Stack:', seedError.stack);
     }
 
     // Start listening
